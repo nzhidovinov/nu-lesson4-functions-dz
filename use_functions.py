@@ -34,6 +34,31 @@
 Для реализации основного меню можно использовать пример ниже или написать свой
 """
 
+
+def refill(account):
+    val = float(input('Введите сумму пополнения: '))
+    account += val
+    return account
+
+
+def purchase(account, history):
+    val = float(input('Введите сумму покуаки: '))
+    if val > account:
+        print('Не достаточно денег на счету.')
+    else:
+        name = input('Название покупки: ')
+        account -= val
+        history.append((name, val))
+    return account, history
+
+
+def print_history(history):
+    for k, v in history:
+        print(f'{k}: {v}')
+
+
+account = 0
+history = []
 while True:
     print('1. пополнение счета')
     print('2. покупка')
@@ -42,11 +67,11 @@ while True:
 
     choice = input('Выберите пункт меню')
     if choice == '1':
-        pass
+        account = refill(account)
     elif choice == '2':
-        pass
+        account, history = purchase(account, history)
     elif choice == '3':
-        pass
+        print_history(history)
     elif choice == '4':
         break
     else:
